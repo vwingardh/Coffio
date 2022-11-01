@@ -1,0 +1,9 @@
+.body {
+    color: red;
+    font-weight: 600;
+}
+
+.background-image {
+    background-image: url(coffio-banner.png);
+    background-size: cover;
+}

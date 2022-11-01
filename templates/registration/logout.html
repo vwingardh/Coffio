@@ -1,0 +1,18 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Logout
+{% endblock %}
+
+
+{% block content %}
+<center>
+    <div class="container mt-4">
+        <div class="alert alert-success" role="alert">
+            <div class="alert-heading">You are now logged out.</div>
+            <p>To log in again, <a href="{% url 'account:user_login' %}" class="alert-link">click here</a>.</p>
+        </div>
+    </div>
+</center>
+{% endblock%}

@@ -1,0 +1,163 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Coffio
+{% endblock %}
+
+
+{% block content %}
+<!-- Banner -->
+<div class="background-image position-relative overflow-hidden">
+  <div class="container">
+    <div class="row">
+      <div class="p-md-5 my-3 banner">
+        <h1 class="col-6 banner-header text-left">Tempered glass, real flavor.</h1>
+        <p class="col-6 col-md-4 lead fw-normal">Sip premium coffee in style.</p>
+        <a class="btn btn-outline-secondary col-5 col-md-4" 
+          href="{% url 'store:all_products' %}">Shop Now
+        </a>
+      </div>
+      <div class="product-device shadow-sm d-none d-md-block"></div>
+      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Mini banner -->
+<div class="position-relative overflow-hidden text-center pt-1 icon-banner">
+  <div class="col-md-10 mx-auto">
+    <p>Premium coffee.  Robust flavors.  Nordic designs.</p>
+  </div>
+</div>
+
+<!-- Welcome display -->
+<div class="position-relative overflow-hidden text-center welcome">
+  <div class="col-md-10 mx-auto">
+    <h2 class="fs-1 fw-normal">Welcome to an all glass coffee experience.</h2>
+  </div>
+</div>
+
+<!-- Start of Products -->
+<div class="container pt-3">
+  <div class="row justify-content-center">
+    <div class="pb-3 pt-3">
+      <h3 class="text-center">Most Popular Right Now</h3>
+    </div>
+
+      {% if product_list %}
+      {% for product in product_list %}
+        
+      <div class="col-5 col-sm-5 col-md-3">
+        <div class="card border-0 pe-2 ps-2">
+          
+          <a href="{{ product.get_absolute_url }}">
+            <img class="img" width="150px;" style="margin-left: 5%;" alt="Responsive image" src="{{ product.image }}">
+          </a>
+
+          <div class="card-body px-0">
+            <p class="card-text home-card-text">
+              <a class="text-dark text-decoration-none fw-bold" 
+                href="{{ product.get_absolute_url }}">{{ product.name }}
+              </a>
+            </p>
+
+            <p class="card-text pt-1" style="margin-top: -5px;">${{product.price}}</p>
+
+            {% if product.in_stock %}
+            <div class="row instock-svg">
+              <div class="col" style="margin-top: -10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" fill="#38E54D" 
+                  class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                  <p class="card-text d-inline" style="margin-left: -10px;">In Stock</p>
+                </svg>
+              </div>
+            </div>
+
+            {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" fill="#F96666" 
+              class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+              <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+              <p class="card-text d-inline" style="margin-left: -10px;">Out of Stock</p>
+            </svg>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="container mt-4 mb-4">
+  <div class="row justify-content-center">
+    
+    {% if reviews %}
+    {% for review in reviews %}
+    <div class="col-md-5 col-lg-6">
+      <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title mt-3 mb-4 text-capitalize pr-3">{{ review.username }}
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F3E0B5" 
+              class="bi bi-star-fill" viewBox="0 0 16 16" style="margin-left: 3%; margin-top: -4px;">
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+              </svg> {{ review.stars }}
+            </h6>
+
+            <ul class="list-unstyled mt-3 mb-4">
+              <hr>
+              <li class="text-start">{{ review.review }}</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<!-- Email signup -->
+<div class="position-relative overflow-hidden p-md-3 text-center email-signup">
+  <div class="col-md-5 p-lg-3 mx-auto my-3">
+    <p class="display-5 fw-normal">Hello coffee lover!</p>
+    <p class="lead fw-normal ps-2 pe-2">Sign up to recieve 10% off your first purchase!</p>
+    
+    <form method="post" action="{% url 'store:sign_up' %}">
+      {% csrf_token %}
+      <label for="email" class="form-label">
+      <input name="email" id="emailAddress" class="form-control" placeholder="Email">
+
+      <input name="email" id="sign_up" class="btn" value="Sign Up" type="submit"></input>
+    </form>
+
+    <!-- Ajax message here -->
+    <div class="lead fw-normal pt-2" id="emailSignup"></div>
+
+  </div>
+</div>
+
+<!-- Ajax message after email signup -->
+<script>
+  $(document).on('click', '#sign_up', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "store:sign_up" %}',
+      data: {
+        email: $('#emailAddress').val(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        document.getElementById("emailSignup").innerHTML = "Thanks for signing up!"
+      },
+      error: function (xhr, errsmg, err) {}
+    });
+  })
+</script>
+
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Details
+{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+<center>
+    <div class="container mt-4">
+        <div class="alert alert-dark" role="alert">
+            {% for message in messages %}
+            <div class="alert-heading">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</center>
+{% endif %} 
+
+<div class="container mt-2">
+    <div class="row d-flex justify-content-center text-start h-100">
+        <div class="col-10 col-md-8 ms-md-5 col-lg-6 p-2 ps-4">
+
+            <form method='post' action="">
+                {% csrf_token %}
+                <div class="form-group">
+
+                    {% for i in user %}
+                    
+                    {% if i %}
+                    <label for="first_name" class="form-label pt-2">
+                        {{ form.first_name.label }}
+                    </label>
+                    <input type="text" class="form-control" name="first_name" 
+                    value="{{ i.first_name }}">
+                    {% if form.first_name.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.first_name.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="last_name" class="form-label pt-2">
+                        {{ form.last_name.label }}
+                    </label>
+                    <input type="text" class="form-control" name="last_name" 
+                    value="{{ i.last_name }}">
+                    {% if form.last_name.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.last_name.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="phone_number" class="form-label pt-2">
+                        {{ form.phone_number.label}}
+                    </label>
+                    <input type="text" class="form-control" name="phone_number" 
+                    
+                    {% if i.phone_number %}
+                    value="{{ i.phone_number }}"
+                    {% else %}
+                    placeholder="555-555-5555"
+                    {% endif %}>
+                    
+                    {% if form.help_text %}
+                        {{ phone_number.help_text }}
+                    {% endif %}
+
+                    {% if form.phone_number.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.phone_number.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="address_line_1" class="form-label pt-2">
+                        {{ form.address_line_1.label}}
+                    </label>
+                    <input type="text" class="form-control" name="address_line_1" 
+                    value="{{ i.address_line_1 }}">
+                    {% if form.address_line_1.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.address_line_1.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="address_line_2" class="form-label pt-2">
+                        {{ form.address_line_2.label }}
+                    </label>
+                    <input type="text" class="form-control" name="address_line_2" 
+                    value="{{ i.address_line_2 }}">
+                    {% if form.address_line_2.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.address_line_2.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="city" class="form-label pt-2">
+                        {{ form.city.label }}
+                    </label>
+                    <input type="text" class="form-control" name="city" 
+                    value="{{ i.city }}">
+                    {% if form.city.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.city.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="state" class="form-label pt-2">
+                        {{ form.state.label }}
+                    </label>
+                    <input type="text" class="form-control" name="state" 
+                    value="{{ i.state }}">
+                    {% if form.state.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.state.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="postcode" class="form-label pt-2">
+                        {{ form.postcode.label }}
+                    </label>
+                    <input type="text" class="form-control" name="postcode" 
+                    value="{{ i.postcode }}">
+                    {% if form.postcode.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.postcode.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="country" class="form-label pt-2">
+                        {{ form.country.label }}
+                    </label>
+                    <select class="form-select" name="country">
+                    
+                    {% for country in countries %}
+                        <option value="{{ country.code }}">
+                            {{ country.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                    {% if form.country.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.country.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <input class="btn add-to-fav-btn mt-3" type="submit" value="Save Changes"></input>
+            </form>             
+        </div>
+    </div>
+</div>
+
+{% endblock %}

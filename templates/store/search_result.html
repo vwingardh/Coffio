@@ -1,0 +1,93 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Coffio
+{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+<center>
+  <div class="container mt-4">
+    <div class="alert alert-dark" role="alert">
+      {% for message in messages %}
+      <div class="alert-heading">{{ message }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</center>
+{% endif %}
+
+{% if search_input %}
+<div class="container mx-auto pt-2">
+  <div class="album py-5">
+    <div class="pb-3">
+      <h3 class="text-center">Products matching "{{ search_input }}"</h3>
+    </div>
+    <div class="row row-cols-2 row-cols-md-3 g-3 justify-content-center">
+        
+      {% if search_results %}
+      {% for product in search_results %}
+      <div class="col">
+        <div class="card border-0 pe-2 ps-2">
+          <a href="{{ product.get_absolute_url }}">
+            <img class="img-fluid" alt="Responsive image" 
+            src="{{ product.image }}">
+          </a>
+          <div class="card-body px-0">
+            <p class="card-text">
+              <a class="text-dark text-decoration-none fw-bold" 
+              href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </p>
+            <div class="card-text" style="margin-top: -10px;">${{product.price}}</div>
+            
+            {% if product.in_stock %}
+            <div class="row instock-svg">
+              <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" fill="#38E54D" 
+                  class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                  <p class="card-text d-inline" style="margin-left: -10px;">In Stock</p>
+                </svg>
+              </div>
+            </div>
+
+            {% else %}
+            <div class="row instock-svg">
+              <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" 
+                  fill="#F96666" class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                  <p class="card-text d-inline" style="margin-left: -10px;">Out of Stock</p>
+                </svg>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    {% else %}
+    <div>There are no products matching "{{ search_input }}"</div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% else %}
+<center>
+  <div class="container mt-4">
+    <div class="col-5">
+      <div class="alert alert-dark" role="alert">
+        <div class="alert-heading">Please enter search terms to find an item.</div>
+      </div>
+    </div>
+  </div>
+</center>
+{% endif %}
+
+{% endblock %}

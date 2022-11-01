@@ -1,0 +1,88 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Update Review
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="col-12">
+            <div class="mb-5 fs-4 text-center pt-4">Update Review</div>
+            
+            <form class="needs-validation" novalidate>
+            <div class="row justify-content-center">
+                
+                <!-- username -->
+                <div class="col-5 col-lg-3 ms-lg-4">
+                    <label for="username" class="form-label">
+                        {{ form.username.label }}
+                    </label>
+                    <input readonly type="text" class="form-control" 
+                    name="username" value="{{ user.username }}">
+                </div>
+
+                <!-- stars -->
+                <div class="col-5 col-lg-3 ms-lg-4">
+                    <div class="form-check">
+                        <div class="col-auto my-1">
+                            <label class="mr-sm-2 mb-1" for="stars">{{ form.stars.label }}</label>
+                            <select class="custom-select mr-sm-2" name="stars" required>
+                            <option selected>Choose...</option>
+                            <option name="stars" value="5">5</option>
+                            <option name="stars" value="4">4</option>
+                            <option name="stars" value="3">3</option>
+                            <option name="stars" value="2">2</option>
+                            <option name="stars" value="1">1</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Review is required.
+                            </div>
+
+                            {% if form.stars.errors %}
+                            <div class="alert alert-danger my-3 p-1" role="alert">
+                                {{ form.stars.errors | striptags }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="row justify-content-center mt-3">
+
+                <!-- review text -->
+                <div class="col-10 col-lg-7 ms-lg-4">
+                    <label for="review" class="form-label mt-3">
+                        {{ form.review.label }}
+                    </label>
+                    <textarea class="form-control" name="review" rows="3" placeholder="{{ review.review }}"></textarea>
+                    
+                    {% if form.review.errors %}
+                    <div class="alert alert-danger my-3 p-1" role="alert">
+                        {{ form.review.errors | striptags }}
+                    </div>
+
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        Review is required.
+                    </div>
+                </div>
+            </div> 
+            <div class="row justify-content-center">
+                <div class="col-10 col-lg-7 ms-lg-4">
+                    <input type="submit" class="btn border-dark px-5 mt-3"
+                     value="Update">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

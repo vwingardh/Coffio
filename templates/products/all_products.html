@@ -1,0 +1,161 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+Products
+{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+<center>
+  <div class="container mt-4">
+    <div class="alert alert-dark" role="alert">
+      {% for message in messages %}
+      <div class="alert-heading">{{ message }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</center>
+{% endif %}
+
+<!-- Category filter -->
+<div class="container mx-auto pt-5">
+  <div class="row">
+    <div class="col">
+      <p>Filter By:</p>
+        <ul class="nav">
+          <li class="nav-item">
+            <div class="dropdown">
+              <div class="dropdown-toggle p-1 m-1 btn border-dark" 
+                data-bs-toggle="dropdown" aria-expanded="false">
+                  Category
+              </div>
+              <ul class="dropdown-menu">
+
+              {% for c in categories %}
+              <li {% if category.slug == c.slug %} class="selected" {% endif %}>
+                <a class="dropdown-item" 
+                href="{% url 'store:filter_products' filter=c.slug %}">{{ c.name | title}}</a>
+              </li>
+              {% endfor %}
+
+              </ul>
+            </div>
+          </li>
+
+<!-- Product feature filter -->
+          <li class="nav-item">
+            <div class="dropdown">
+              <div class="dropdown-toggle p-1 m-1 btn border-dark"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                  Product Feature
+              </div>
+              <ul class="dropdown-menu">
+
+                {% for item in color_or_roast %}
+                <li class="selected">
+                    <a class="dropdown-item" 
+                    href="{% url 'store:filter_products' filter=item.color_roast %}">
+                    {{ item.color_roast | title}}</a>
+                </li>
+                {% endfor %}
+
+              </ul>
+            </div>
+          </li>
+
+<!-- Product type filter -->
+          <li class="nav-item">
+            <div class="dropdown">
+              <div class="dropdown-toggle p-1 m-1 btn border-dark"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                  Product Type
+              </div>
+              <ul class="dropdown-menu">
+
+              <li class="selected">
+                  <a class="dropdown-item" 
+                  href="{% url 'store:filter_products' filter='tempered glass' %}">
+                  Tempered Glass</a>
+              </li>
+              <li class="selected">
+                <a class="dropdown-item" 
+                href="{% url 'store:filter_products' filter='peruvian blend' %}">
+                Peruvian Blend</a>
+              </li>
+              <li class="selected">
+                <a class="dropdown-item" 
+                href="{% url 'store:filter_products' filter='colombian blend' %}">
+                Colombian Blend</a>
+              </li>
+              <li class="selected">
+                <a class="dropdown-item" 
+                href="{% url 'store:filter_products' filter='costa rica blend' %}">
+                Costa Rica Blend</a>
+              </li>
+
+              </ul>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Start of products -->
+<div class="container">
+  <div class="album py-5">
+    <div class="pb-3">
+      <h3 class="text-center">Products</h3>
+    </div>
+    <div class="row row-cols-2 row-cols-md-3 g-3 justify-content-center">
+
+      {% if products %}
+      {% for product in products %}
+      <div class="col">
+        <div class="card border-0 pe-2 ps-2">
+          <a href="{{ product.get_absolute_url }}">
+            <img class="img-fluid" alt="Responsive image" 
+            src="{{ product.image }}">
+          </a>
+          <div class="card-body px-0">
+            <p class="card-text">
+              <a class="text-dark text-decoration-none fw-bold" 
+              href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </p>
+            <div class="card-text" style="margin-top: -10px;">${{product.price}}</div>
+            
+            {% if product.in_stock %}
+            <div class="row instock-svg">
+              <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" fill="#38E54D" 
+                  class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                  <p class="card-text d-inline" style="margin-left: -10px;">In Stock</p>
+                </svg>
+              </div>
+            </div>
+    
+            {% else %}
+            <div class="row instock-svg">
+              <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" 
+                  fill="#F96666" class="bi bi-dot" style="margin: 0px; margin-left: -18px;" viewBox="0 0 16 16">
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                  <p class="card-text d-inline" style="margin-left: -10px;">Out of Stock</p>
+                </svg>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

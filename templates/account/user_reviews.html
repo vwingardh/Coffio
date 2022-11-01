@@ -1,0 +1,82 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Your Reviews
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        
+        {% if reviews %}
+        {% for review in reviews %}
+        <div class="col-md-7">
+            <div class="card mt-3 mb-4 rounded-3 shadow-sm">
+                <div class="title-header fs-4 text-center pt-2">
+                    {{ review.product.name }}
+                </div>
+                
+                <div class="col d-flex justify-content-center">
+                    <img src="{{ review.product.image }}" style="width: 200px;" 
+                    class="card-img-top" alt="Coffio Cup">
+                </div>
+
+                <div class="card-body">
+                    <div class="card-title my-4 mx-5 text-center">
+                        {{ review.review }}
+                    </div>
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <hr>
+                        <li class="text-start mx-5">Number of stars: {{ review.stars }}</li>
+                        <li class="text-start mx-5">Review created on: {{ review.created | date:"M d, Y" }}</li>
+                    </ul>
+
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <form method='post' action="{% url 'account:user_remove_review' pk=review.product.id %}">
+                                {% csrf_token %}
+                                    
+                                <button class="btn btn-danger mx-2 px-5" type="submit" 
+                                name="delete" value="{{ review.product.id }}">Delete</button>     
+                            </form>
+
+                            <form method='get' action="{% url 'account:user_update_review' pk=review.product.id %}">
+                                {% csrf_token %}
+                                    
+                                <button class="btn btn-success mx-2 px-5" type="submit" 
+                                name="update" value="{{ review.product.id }}">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+                       
+<!-- No reviews for user -->            
+    {% else %}
+    <div class="d-inline-flex justify-content-center p-3">
+        <div class="alert alert-dark" role="alert">
+            You have no reviews!
+        </div>
+    </div>
+    {% endif %}
+
+<!-- User is not authenticated -->
+    {% else %}
+    <div class="d-inline-flex justify-content-center p-3">
+        <div class="alert alert-dark" role="alert">
+            You must be logged in to visit this page.
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

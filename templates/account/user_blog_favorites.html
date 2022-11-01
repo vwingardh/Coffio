@@ -1,0 +1,49 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Blog Favorites
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        
+        {% if blog_list %}
+        {% for blog in blog_list %}
+        <div class="col-md-5">
+            <div class="card mt-3 mb-4 rounded-3 shadow-sm">
+                <div class="card-body">
+
+                    <div class="card-title fs-4 pb-2 text-center pt-2">{{ blog.title }}</div>
+                    
+                    <p class="card-text">{{ blog.content | slice:'0:100'}}...</p>
+                    
+                    <div class="text-center">   
+                        <div class="btn-group mt-3">
+                            <a href="{% url 'blog:blog_remove_favorite' pk=blog.id %}" 
+                            class="btn add-to-fav-btn px-3" value="{{ blog.id }}" type="submit" name="">Remove Favorite</a>
+                    
+                            <a href="{% url 'blog:blog_article' blog.slug %}" 
+                            class="btn add-to-fav-btn px-3" value="{{ blog.slug }}" type="submit" name="">See Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- No favorites for user -->
+    {% else %}
+    <div class="d-inline-flex justify-content-center p-3">
+        <div class="alert alert-dark" role="alert">
+            You have no blog favorites!
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

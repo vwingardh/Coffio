@@ -1,0 +1,131 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+Payment
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Start of billing address form -->
+<div class="container">
+    <div class="py-3 text-center">
+        <img class="d-block mx-auto mb-2" src="{% static 'store/coffio-logo.png' %}" 
+        alt="Logo" width="150">
+    </div>
+
+    <div class="col-md-7 ms-md-5 col-lg-7">
+        <h4 class="mb-3">Billing address</h4>
+        <!-- Error messages in this element -->
+        <div id="card-errors" class="a" role="alert"></div>
+
+        <form id="payment-form" class="needs-validation" novalidate>
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="full_name" class="form-label">First and last name</label>
+                <input id="custName" type="text" class="form-control" name="full_name" required>
+                <div class="invalid-feedback">
+                    Valid name is required.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input id="custEmail" type="email" class="form-control" 
+                name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="address_line_1" class="form-label">Address 1</label>
+                <input id="custAdd" type="text" class="form-control" name="address_line_1" 
+                placeholder="1234 Main St" required>
+                <div class="invalid-feedback">
+                    Please enter your shipping address.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="address_line_2" class="form-label">Address 2 
+                    <span class="text-muted">
+                        (Optional)
+                    </span>
+                </label>
+                <input id="custAdd2" type="text" class="form-control" name="address_line_2" 
+                placeholder="Apartment or suite">
+                </div>
+
+                <div class="col-md-5">
+                <label for="country" class="form-label">Country</label>
+                    <select class="form-select" name="country" required>
+                        
+                        {% for country in countries %}
+                        <option id="custCountry" value="{{ country.code }}">
+                            
+                            {% if i.country %}{{ i.country }}
+                            
+                            {% else %}
+                            {{ country.name }}
+                            {% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                <div class="invalid-feedback">
+                    Please select a valid country.
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="state" class="form-label">State</label>
+                <input id="custState" type="text" class="form-control" name="state" required>
+                <div class="invalid-feedback">
+                    Please provide a valid state.
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="city" class="form-label">City</label>
+                <input id="custCity" type="text" class="form-control" name="city" required>
+                <div class="invalid-feedback">
+                    Please provide a valid state.
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="postcode" class="form-label">Postcode</label>
+                <input id="custPostcode" type="text" class="form-control" name="postcode" required>
+                <div class="invalid-feedback">
+                    Postcode is required.
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+<!-- Start of Stripe payment -->
+        <h4 class="mb-3">Payment</h4>
+        <label for="card-element">Credit or debit card</label>
+        <div id="card-element" class="form-control form-control-payment">
+            <!-- Payment elements will appear here -->
+        </div>
+
+        <button id="submit" class="w-100 btn border-dark btn-lg mt-2" type="submit"
+        data-secret="{{ client_secret }}">Pay</button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    {% comment %} Make csrf token available in JS files {% endcomment %}
+    var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script src="{% static 'payment/index.js' %}" data-rel-js></script>
+
+{% endblock %}

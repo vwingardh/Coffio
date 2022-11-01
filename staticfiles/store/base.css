@@ -1,0 +1,239 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet');
+html, body, p, div{
+    letter-spacing: -0.02px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    color: #1F1913;
+}
+
+h1 {
+    font-family: 'Yeseva One', serif;
+    font-size: 40px;
+}
+h2 {
+    font-family: 'Yeseva One', serif;
+    font-size: 55px;
+}
+
+.navbar {
+    border-bottom: 1px solid #1F1913;
+    background-color: #FFF;
+}
+
+.navbar-toggler {
+    border-color: #1F1913;
+} 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(31,25,19, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+.dropdown-menu {
+    top: 58px;
+    left: 0px;
+    padding: 10px;
+}
+
+.nav-item {
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.nav-item a {
+    color: #1F1913;
+}
+.nav-item a:hover {
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+/* Navbar Search Form */
+#search-form input {
+    border: transparent;
+}
+
+#search-form button {
+    color: #A38168;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+#search-form button:hover {
+    background-color: transparent;
+}
+
+#search-form svg:hover {
+    color: #A38168;
+}
+
+
+
+
+.nav-auth:hover {
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.background-image {
+    background-image: url(coffio-banner.png);
+    background-color: #C0A899; 
+    background-size: cover;
+    padding: 8%;
+}
+
+.background-image h1 {
+    font-weight: 600;
+}
+
+
+.background-image > div > p,
+.background-image > div > a {
+    margin-left: -4%;
+}
+
+.banner a,
+.btn-styling {
+    border: 1px solid #1F1913;
+    color: #1F1913;
+}
+.banner a:hover {
+    color: #FFFFFF;
+    transition-duration: 0.4s;
+    background-color: #1F1913;
+}
+
+
+
+.icon-banner {
+    background-color: #1F1913;
+    color: #FFFFFF;
+}
+.icon-banner p {
+    margin-bottom: .5rem;
+}
+
+
+.welcome {
+    background-color: #F3EBE3;
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+
+
+
+.home-card-text {
+    margin-bottom: 0;
+
+} 
+
+
+.instock-svg {
+    margin-top: -10px;
+}
+
+.email-signup {
+    background-color: #F3EBE3;
+    padding-top: 8%;
+    padding-bottom: 4%;
+}
+
+.email-signup input {
+    border: 1px solid #C0A899;
+}
+
+#emailAddress {
+    margin-left: -50px;
+    display: inline-block;
+}
+#sign_up {
+    margin-right: -50px;
+    margin-top: -3px;
+    border: 1px solid #C0A899;
+    color: #1F1913;
+}
+
+
+.add-to-fav-btn {
+    border: 1px solid #A38168;
+    background-color: transparent;
+}
+
+.add-to-cart-btn {
+    border: 1px solid #C0A899;
+    background-color: #C0A899;
+}
+
+.add-to-cart-btn:hover {
+    border: 1px solid #A38168; 
+    background-color: #A38168;
+    color: #FFF;
+    transition-duration: 0.4s;
+}
+
+.add-to-fav-btn:hover {
+    border: 1px solid #1F1913;
+    transition-duration: 0.4s;
+}
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+    .banner h1 {
+        font-size: 35px;
+    }
+    .background-image {
+        background-position: 20%;
+    }
+    .banner p {
+        font-size: 20px;
+    }
+    .footer {
+        text-align: center;
+    }
+    #search-form {
+        margin-bottom: 3%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer */
+.footer > div > div > ul > li {
+    padding-bottom: 6px;
+}
+
+
+

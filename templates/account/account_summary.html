@@ -1,0 +1,78 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Account Summary
+{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+<center>
+    <div class="container mt-4">
+        <div class="alert alert-dark" role="alert">
+            {% for message in messages %}
+            <div class="alert-heading">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+<center>
+{% endif %} 
+
+{% if user.is_authenticated %}
+
+<div class="text-center fs-1 mt-3">Hello, {{ user.first_name | capfirst }}!</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <img src="{% static 'store/summary.png' %}" 
+                width="200" style="margin-top: -15px;" alt="coffee cup and heart">
+            </div>
+        </div>
+
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"  
+                href="{% url 'account:user_details' pk=user.id %}">Profile Details</a>
+            </div>
+
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"
+                href="{% url 'account:user_account_orders' %}">View Orders</a>
+            </div>
+
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"
+                class="btn" href="{% url 'account:user_review_list' %}">Product Reviews</a>
+            </div>
+        </div>
+
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"
+                href="{% url 'account:user_favorite_list' %}">Favorite Products</a>
+            </div>
+
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"
+                class="btn" href="{% url 'blog:blog_favorites_list' %}">Blog Favorites</a>
+            </div>
+
+            <div class="col col-sm-3 col-md-2 col-lg-2 mb-3">
+                <a class="btn add-to-fav-btn"
+                href="{% url 'account:user_account_deletion' %}">Delete Account</a>
+            </div>
+        </div>
+    </div>
+
+<!-- User not authenticated -->
+{% else %}
+<div class="container mt-4">
+    <div class="alert alert-dark" role="alert">
+        <h4 class="alert-heading">You must be logged in to see this page</h4>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

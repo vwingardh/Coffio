@@ -1,0 +1,60 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Favorites
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        {% if product_list %}
+        {% for product in product_list %}
+        <div class="col-md-5">
+            <div class="card mt-3 mb-4 rounded-3 shadow-sm">
+                <div class="card-body">
+                    <div class="card-title fs-4 text-center pt-2">{{ product.name }}</div>
+                    
+                    <div class="col d-flex justify-content-center">
+                        <img class="d-flex justify-content-center" style="width: 200px;" 
+                        src="{{ product.image }}">
+                    </div>
+                    
+                    <div class="text-center">   
+                        <div class="btn-group">
+                            <a href="{% url 'account:user_remove_favorite' pk=product.id %}" 
+                            class="btn add-to-fav-btn px-3" value="{{ product.id }}" type="submit">Remove Favorite</a>
+                            
+                            <a href="{% url 'store:product_detail' slug=product.slug %}" 
+                            class="btn add-to-fav-btn px-3" value="{{ product.slug }}" type="submit">See Product</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- No favorites for user -->
+    {% else %}
+    <div class="d-inline-flex justify-content-center p-3">
+        <div class="alert alert-dark" role="alert">
+            You have no favorites!
+        </div>
+    </div>
+    {% endif %}
+
+<!-- User is not authenticated -->
+    {% else %}
+    <div class="alert alert-dark" role="alert">
+        You must be logged in to visit this page.
+    </div>
+    {% endif %}
+
+{% endblock %}

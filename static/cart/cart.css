@@ -1,0 +1,31 @@
+.cart-qty{
+    color: #fff;
+    background: #A38168;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+    height: 15px;
+    width: 14px;
+    position: absolute;
+    box-sizing: content-box;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 1px;
+    right: 10px;
+}
+
+.cart-btn{
+    position: relative;
+}
+
+.cart-btn:hover, .cart-btn:focus, .cart-btn:active, .cart-btn.active{
+    color: #1F1913;
+}
+
+.nav-auth,
+svg {
+    color: #1F1913;
+}

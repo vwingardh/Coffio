@@ -1,0 +1,45 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Account Deletion
+{% endblock %}
+
+
+{% block content %}
+<center>
+{% if messages %}
+    <div class="container mt-4">
+        <div class="alert alert-dark" role="alert">
+            {% for message in messages %}
+            <div class="alert-heading">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</center>
+{% endif %} 
+
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="text-center fs-3 mt-3">Are you sure you want to delete your account?<div>
+    
+    <div class="text-center">
+        <div class="btn-group mt-4">
+            
+            <form method='post' action="{% url 'account:user_account_deletion' %}">
+                {% csrf_token %}
+                <input class="btn btn-success mx-2 px-5" name="cancel" type="submit" value="Cancel">
+                <input class="btn btn-danger mx-2 px-5" name="delete" type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- User is not authenticated -->
+{% else %}
+<div class="container">
+    <div class="text-center fs-3 mt-3">You must be logged in to see this page.<div>
+</div>
+{% endif %}
+
+{% endblock %}

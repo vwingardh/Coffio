@@ -1,0 +1,55 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Coffio FAQs
+{% endblock %}
+
+
+{% block content %}
+<div class="container justify-content-center align-items-center pt-3">
+    <div class="p-2">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <div class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" 
+            aria-expanded="false" aria-controls="flush-collapseOne">
+                Is a coffee bean actually a bean?
+            </button>
+        </div>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" 
+            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">No, it's a seed!</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" 
+            aria-expanded="false" aria-controls="flush-collapseTwo">
+                What is the most common coffee?
+            </button>
+        </div>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" 
+            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">Arabica coffee beans.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header" id="flush-headingThree">
+            <button class="accordion-button collapsed" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" 
+            aria-expanded="false" aria-controls="flush-collapseThree">
+                How much caffeine is in coffee?
+            </button>
+        </div>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" 
+            aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">Roughly 40mg per 100 grams.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

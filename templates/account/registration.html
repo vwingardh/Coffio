@@ -1,0 +1,97 @@
+{% extends "../store/base.html" %}
+{% load static %}
+
+{% block title %}
+Register
+{% endblock %}
+
+
+{% block content %}
+
+{% if messages %}
+<center>
+    <div class="container mt-4">
+        <div class="alert alert-dark" role="alert">
+            {% for message in messages %}
+            <div class="alert-heading">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</center>
+{% endif %}
+
+<div class="container mt-2">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-10 col-md-8 ms-md-5 col-lg-6 p-2 ps-4">
+            
+            <form method='post' action="{% url 'account:user_registration' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" class="form-label pt-2">
+                        {{ form.username.label }}
+                    </label>
+                    <input type="text" class="form-control" name="username">
+                    {% if form.username.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.username.errors | striptags }}
+                    </div>
+                    {% endif %}
+
+                    <label for="email" class="form-label pt-2">
+                        {{ form.email.label }}
+                    </label>
+                    <input type="email" class="form-control" name="email">
+                    {% if form.email.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.email.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="password_1" class="form-label pt-2">
+                        {{ form.password_1.label}}
+                    </label>
+                    <input type="password" class="form-control" name="password_1">
+                    {% if form.password_1.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.password_1.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="password_2" class="form-label pt-2">
+                        {{ form.password_2.label}}
+                    </label>
+                    <input type="password" class="form-control" name="password_2">
+                    {% if form.password_2.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.password_2.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="first_name" class="form-label pt-2">
+                        {{ form.first_name.label }}
+                    </label>
+                    <input type="text" class="form-control" name="first_name">
+                    {% if form.first_name.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.first_name.errors | striptags }}
+                    </div>
+                    {% endif %}
+                    
+                    <label for="last_name" class="form-label pt-2">
+                        {{ form.last_name.label }}
+                    </label>
+                    <input type="text" class="form-control" name="last_name">
+                    {% if form.last_name.errors %}
+                    <div class="alert alert-danger my-3 p-1" 
+                        role="alert">{{ form.last_name.errors | striptags }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <input class="btn add-to-fav-btn mt-3" type="submit" value="Register"></input>
+            </form>             
+        </div>
+    </div>
+</div>
+
+{% endblock %}
