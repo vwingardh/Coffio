@@ -100,16 +100,13 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = "/home/vwingardh/Coffio/static"
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "/home/vwingardh/Coffio/media"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -124,9 +121,9 @@ LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/account/summary/'
 
 
-STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
-STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
 
 SESSION_COOKIE_SECURE = True
