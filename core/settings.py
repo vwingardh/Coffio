@@ -1,10 +1,10 @@
 from pathlib import Path
-from decouple import config
+import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
@@ -65,7 +65,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'coffioDB',
         'USER': 'postgres',
-        'PASSWORD': config('PASSWORD'),
+        'PASSWORD': os.getenv('PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
