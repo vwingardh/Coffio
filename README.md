@@ -11,6 +11,10 @@ Built with:
 * Stripe API
 * PythonAnywhere
 
+## 🎥 Video Preview
+
+https://user-images.githubusercontent.com/101557392/199680865-c5ee672c-9748-417f-b853-7c1f0f0a5e9e.mp4
+
 ## 👩‍🔧 Getting Started 
 
 These instructions will provide you a copy of the project that you can run locally. Visit [PythonAnywhere](https://pythonanywhere.com/ "PythonAnywhere") to set up a free account if you would like to host.
