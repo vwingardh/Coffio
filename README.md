@@ -1,6 +1,6 @@
 # Coffio E-Commerce Website
 
-A responsive e-commerce website featuring Coffio, a sample coffee brand utilizing Postgres for product inventory, content management, and user accounts. Users can create accounts to save products and blog posts to their favorites list. Users can also write product reviews, update profile details, view orders, and purchase products using Stripe API.   
+A responsive e-commerce website featuring Coffio, a sample coffee brand utilizing PostgreSQL for product inventory, content management, and user accounts. Users can create accounts to save products and blog posts to their favorites list. Users can also write product reviews, update profile details, view orders, and purchase products using Stripe API.   
 
 Built with:
 * Python
@@ -59,7 +59,7 @@ Otherwise, create a PostgreSQL database using pgAdmin and configure NAME and PAS
 
 **Step 8:** Delete existing migrations and migrate to new database.
 ```python
-pythonpython manage.py makemigrations
+python manage.py makemigrations
 
 python manage.py migrate
 ```
