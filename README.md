@@ -23,7 +23,7 @@ These instructions will provide you a copy of the project that you can run local
 
 **Step 1:** Open Git Bash and change the current working directory to the location where you want the cloned directory. 
 ```python
-git clone git@github.com:vwingardh/BucketList.git
+git clone git@github.com:vwingardh/Coffio.git
 ```
 
 **Step 2:** Create a virual environment for web app.
