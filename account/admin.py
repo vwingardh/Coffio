@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.core.exceptions import ValidationError
-
 from account.models import CustomUser
 
 
@@ -40,9 +39,7 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-
     form = UserRegistrationForm
-
     list_display = (
         'email', 
         'username', 
@@ -52,7 +49,6 @@ class UserAdmin(BaseUserAdmin):
     )
     ordering = ('username',)
     filter_horizontal = ()
-
 
 admin.site.register(CustomUser, UserAdmin)
 admin.site.unregister(Group)

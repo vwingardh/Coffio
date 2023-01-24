@@ -1,18 +1,16 @@
+from django_countries.widgets import CountrySelectWidget
+from django_countries import countries
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, RegexValidator
-
 from .models import CustomUser
-
-from django_countries.widgets import CountrySelectWidget
-from django_countries import countries
 
 
 class UserLoginForm(forms.Form):
     """
     A form for logging in registered users.
     """
-
     username = forms.CharField(
         required = True,
         strip = True,
@@ -36,7 +34,7 @@ class UserLoginForm(forms.Form):
             }
         )   
     )
-    
+
     class Meta:
         model = CustomUser
         fields = ('username', 'password')
@@ -53,7 +51,6 @@ class UserRegistrationForm(forms.ModelForm):
     A form for creating new users. Includes all required fields, 
     plus a confirmation password.
     """
-
     username = forms.CharField(
         required = True,
         max_length = 50,
@@ -192,7 +189,6 @@ class UserShippingForm(forms.ModelForm):
     """
     A form for registered users to save their shipping info.
     """
-
     first_name = forms.CharField(
         max_length=150, 
         label='First Name',
@@ -309,7 +305,6 @@ class UserDeletionForm(forms.ModelForm):
     A form for users to deactivate their accounts. is_active is 
     set to False rather than deleting the account.
     """
-
     is_active = forms.BooleanField(
         widget = forms.TextInput(
             attrs={

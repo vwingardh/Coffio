@@ -8,7 +8,6 @@ def category_filter(filter):
     A function that queries the database using the filter
     chosen by user.
     """
-    
     try:
         category = Category.objects.get(slug=filter)
         products = Product.products.filter(category=category.id)

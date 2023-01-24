@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
 from blog.models import Blog
 
 
@@ -19,12 +18,10 @@ def blog_article(request, slug):
 @login_required 
 def blog_favorite(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
-
     if blog.favorite.filter(id=request.user.id):
         blog.favorite.remove(request.user.id)
     else:
-        blog.favorite.add(request.user.id)
-        
+        blog.favorite.add(request.user.id)  
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

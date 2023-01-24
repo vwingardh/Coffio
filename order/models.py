@@ -1,10 +1,9 @@
-from django.db import models
-from decimal import Decimal
-from django.conf import settings
-from store.models import Product
+import uuid
 from django_countries.fields import CountryField
 
-import uuid
+from django.db import models
+from django.conf import settings
+from store.models import Product
 
 
 class Order(models.Model):

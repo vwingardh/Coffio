@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet');
 
-
 html, body, p, div{
     letter-spacing: -0.02px;
     font-family: 'Roboto', sans-serif;
@@ -20,7 +19,6 @@ h2 {
     font-family: 'Yeseva One', serif;
     font-size: 55px;
 }
-
 
 /* Navbar */
 .navbar {
@@ -59,7 +57,6 @@ h2 {
     background-color: transparent;
 }
 
-
 /* Navbar Search Form */
 #search-form input {
     border: transparent;
@@ -79,13 +76,11 @@ h2 {
     color: #A38168;
 }
 
-
 /* Navbar auth icons */
 .nav-auth:hover {
     text-decoration: underline;
     background-color: transparent;
 }
-
 
 /* Banner */
 .background-image {
@@ -115,7 +110,6 @@ h2 {
     background-color: #1F1913;
 }
 
-
 /* Mini Banner */
 .icon-banner {
     background-color: #1F1913;
@@ -125,7 +119,6 @@ h2 {
     margin-bottom: .5rem;
 }
 
-
 /* Welcome Banner */
 .welcome {
     background-color: #F3EBE3;
@@ -133,12 +126,10 @@ h2 {
     padding-bottom: 8%;
 }
 
-
 /* Products on Home.html */
 .instock-svg {
     margin-top: -10px;
 }
-
 
 /* Email signup */
 .email-signup {
@@ -169,7 +160,6 @@ h2 {
     color: #FFF;
 }
 
-
 /* Button styling */
 .add-to-cart-btn {
     border: 1px solid #CFBEB6;
@@ -193,7 +183,6 @@ h2 {
     background-color: #C0A899;
     transition-duration: 0.4s;
 }
-
 
 /* Footer */
 .footer > div > div > ul > li {

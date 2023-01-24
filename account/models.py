@@ -1,23 +1,20 @@
+from django_countries.fields import CountryField
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 
-from django_countries.fields import CountryField
-
 
 class CustomUserManager(BaseUserManager):
-
     def create_user(self, email, username, first_name, last_name, password):
         """
         Creates and saves a User with the required fields.
         """
-        
         if not email:
             raise ValueError('Users must have an email address.')
         if not username:
             raise ValueError('Users must have a username.')
-
         email = self.normalize_email(email)
         user = self.model(
             email=email, 
@@ -49,7 +46,6 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(
         unique=True, 
         verbose_name='email address', 
@@ -81,9 +77,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
-
     USERNAME_FIELD = 'username'
-
     REQUIRED_FIELDS = [
         'email', 
         'first_name', 

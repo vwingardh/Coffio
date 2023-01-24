@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import (
     Category,
     Reviews,
@@ -12,7 +11,6 @@ from .models import (
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
-
     prepopulated_fields = {'slug': ('name',),}
 
 
@@ -44,5 +42,4 @@ class ProductAdmin(admin.ModelAdmin):
         'created',
         'updated',
     ]
-
     prepopulated_fields = {"slug": ("name",),}

@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import EmailList, Reviews
 
 
@@ -7,7 +6,6 @@ class ReviewForm(forms.ModelForm):
     """
     A form for users to create a review for a specific product.
     """
-
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -43,7 +41,6 @@ class ReviewForm(forms.ModelForm):
     verified = forms.BooleanField(
         required=False
     )
-
     class Meta:
         model = Reviews
         fields = [
@@ -57,7 +54,6 @@ class EmailListForm(forms.ModelForm):
     """
     A form to capture users that sign up for the email list.
     """
-    
     email = forms.EmailField() 
 
     class Meta:

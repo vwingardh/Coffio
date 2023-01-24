@@ -5,7 +5,6 @@ from .models import Blog, BlogMedia
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['title', 'author']
-
     prepopulated_fields = {'slug': ('title',),}
 
 

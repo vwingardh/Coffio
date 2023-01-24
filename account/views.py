@@ -1,18 +1,16 @@
+from django_countries import countries
+
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from store.models import Product, Reviews
 from store.forms import ReviewForm
 from .forms import UserRegistrationForm, UserLoginForm, UserShippingForm, UserDeletionForm
 from .models import CustomUser
 from order.views import user_orders
-
 from django.db.models import Q
-from django_countries import countries
 
 
 def match(password_1, password_2):
@@ -26,10 +24,8 @@ def match(password_1, password_2):
 
 
 def user_registration(request):
-
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-
         if form.is_valid():
             user = form.save(commit=False)
             form.username = form.cleaned_data['username']
@@ -48,7 +44,6 @@ def user_registration(request):
                 return redirect('account:user_account_summary')
     else:
         form = UserRegistrationForm()
-    
     return render(request, 'account/registration.html', {'form': form})         
 
 
@@ -64,32 +59,26 @@ def user_logout(request):
 
 
 def user_login(request):
-
     if request.method == "POST":
         form = UserLoginForm(request.POST)
-
         if form.is_valid():
             form.username = form.cleaned_data['username']
             form.password = form.cleaned_data['password']
             user = authenticate(request, username=form.username, password=form.password)
-
             if user is not None:
                 login(request, user)
                 return redirect('account:user_account_summary')
-
             else:
                 messages.error(request, "Username or password is incorrect.")
                 return redirect('account:user_login')
     else:
         form = UserLoginForm()
-    
     return render(request, 'registration/login.html', {'form': form})
 
 
 @login_required
 def user_details(request, pk):
     user = CustomUser.objects.filter(pk=pk)
-    
     if request.method == 'POST':
         form = UserShippingForm(request.POST, instance=request.user)
 
@@ -99,27 +88,22 @@ def user_details(request, pk):
             return redirect('account:user_account_summary')  
     else:
         form = UserShippingForm(instance=request.user)
-
     return render(request, 'account/details.html', {'form': form, 'user': user, 'countries': countries})        
 
 
 @login_required
 def user_account_deletion(request):
-
     if request.method == 'POST':
-
         if request.POST.get('delete'):
             form = UserDeletionForm(request.POST)
             user = CustomUser.objects.get(username=request.user.username)
             user.is_active = False
             user.save()
             return redirect('store:home')
-
         if request.POST.get('cancel'):
             return redirect('account:user_account_summary')
     else:
         form = UserDeletionForm()
-    
     return render(request, 'account/delete_account.html', {'form': form})
  
 
@@ -144,12 +128,10 @@ def user_account_orders(request):
 @login_required 
 def add_to_favorite(request, pk):
     product = get_object_or_404(Product, pk=pk)
-
     if product.favorite.filter(id=request.user.id):
         product.favorite.remove(request.user.id)
     else:
         product.favorite.add(request.user.id)
-        
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
@@ -166,12 +148,10 @@ def user_remove_review(request, pk):
     username = Q(username=request.user.username)
     product = Q(product=pk)
     review = Reviews.objects.get(username, product)
-
     if request.method == 'POST':
         review.delete()
         messages.success(request, "Your review has been deleted!")
         return redirect('account:user_account_summary')
-
     if request.method == 'GET':
         return render(request, 'account/review_update.html')
 
@@ -180,20 +160,15 @@ def user_remove_review(request, pk):
 def user_update_review(request, pk):
     username = Q(username=request.user.username)
     product = Q(product=pk)
-
     review = Reviews.objects.get(username, product)
-
     if request.method == 'POST':
         form = ReviewForm(request.POST)
-
         if form.is_valid():
             review.review = request.POST.get('review')
             review.stars = request.POST.get('stars')
             review.save(update_fields=['review', 'stars'])
-
             messages.success(request, "Your review has been updated!")
             return redirect('account:user_account_summary')
     else:
         form = ReviewForm()
-        
     return render(request, 'account/review_update.html', {'form': form, 'review': review})

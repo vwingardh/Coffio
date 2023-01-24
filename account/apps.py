@@ -1,5 +1,6 @@
-from django.apps import AppConfig
 import os
+
+from django.apps import AppConfig
 from django.conf import settings
 
 

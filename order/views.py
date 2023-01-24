@@ -1,5 +1,4 @@
 from django.http.response import JsonResponse
-
 from cart.cart import Cart
 from .models import Order, OrderItem
 
@@ -7,11 +6,9 @@ from .models import Order, OrderItem
 def add(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
-
         user_id = request.user.id
         order_key = request.POST.get('order_key')
         cart_total = cart.get_total_price()
-
         # Check if order exists in DB
         if Order.objects.filter(order_key=order_key).exists():
             pass
@@ -29,9 +26,7 @@ def add(request):
                 total_paid = cart_total, 
                 order_key = order_key
             )
-            
             order_id = order.pk
-
             for item in cart:
                 OrderItem.objects.create(
                     order_id = order_id,
@@ -39,9 +34,7 @@ def add(request):
                     price = item['price'],
                     quantity = item['qty']
                 )
-            
             response = JsonResponse({'success': 'Order saved in DB'})
-
             return response
 
 

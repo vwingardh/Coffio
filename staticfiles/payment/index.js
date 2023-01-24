@@ -1,4 +1,3 @@
-
 var stripe = Stripe('pk_test_51LiHPkI0COXPXr7YmdDzEpw5gan2IicINbsRTulzpARMXgOixbR3pe0Z8HcK8MIDiT4eWUTuEpZYCsKvdW7FTQ7z00V0P5ZMoV')
 
 var elem = document.getElementById('submit');
@@ -43,7 +42,7 @@ form.addEventListener('submit', function(ev) {
 
     $.ajax({
         type: "POST",
-        url: 'http://127.0.0.1:8000/order/add/',
+        url: 'http://vwingardh.pythonanywhere.com/order/add/',
         data: {
           order_key: clientsecret,
           csrfmiddlewaretoken: CSRF_TOKEN,
@@ -78,7 +77,7 @@ form.addEventListener('submit', function(ev) {
                     // execution. Set up a webhook or plugin to listen for the 
                     // payment_intent.succeeded event that handles any business
                     // critical post-payment actions.
-                    window.location.replace("http://127.0.0.1:8000/payment/orderplaced/");
+                    window.location.replace("http://vwingardh.pythonanywhere.com/payment/orderplaced/");
                 }
             }
         });

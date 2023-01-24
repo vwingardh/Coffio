@@ -4,10 +4,8 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.urls import reverse
-
 from .models import Product, Media, Reviews, Category
 from .forms import ReviewForm, EmailListForm
-
 from store.product_filters import category_filter
 
 
@@ -29,13 +27,10 @@ def product_detail(request, slug):
     favorites = Product.total_favorites(slug)
     average = Reviews.get_average_rating(pk=product.id)
     reviews = Reviews.objects.filter(product=product.id)  
-
     if request.method == 'POST':
         form = ReviewForm(request.POST)
-        
         if form.is_valid():
             previous_review = Reviews.match(request, product.id)
-            
             if previous_review == True:
                 messages.error(request, 'This username has already created a review for this product.')
                 return redirect(reverse('store:product_detail', kwargs={'slug': slug}))
@@ -47,7 +42,6 @@ def product_detail(request, slug):
                 return redirect(reverse('store:product_detail', kwargs={'slug': slug}))
     else:
         form = ReviewForm()
-    
     return render(request, 'products/single_product.html', {
         'product': product, 
         'images': images, 
@@ -65,7 +59,6 @@ def all_products(request):
 
 def filter_products(request, filter):
     products = category_filter(filter)
-
     if products:
         return render(request, 'products/all_products.html', {'products': products})
     else:
@@ -83,24 +76,21 @@ def category_list(request, category_slug):
 def sign_up(request):
     if request.method == 'POST':
         form = EmailListForm(request.POST)
-
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.path_info)
-    
     else:
         form = EmailListForm()
-    
     return render(request, 'account/account_summary.html', {'form': form})
 
 
 def search_form(request):
     return render(request, 'store/search_form.html')
 
+
 def search_result(request):
     if request.method == 'POST':
         search_input = request.POST['search_input']
-        
         if search_input:
             search_results = Product.products.filter(name__contains=search_input)
             return render(request, 'store/search_result.html', {
@@ -110,7 +100,6 @@ def search_result(request):
         else:
             messages.error(request, "Sorry, there are no results for that search.")
             return render(request, 'store/search_result.html')
-    
     else:
         return render(request, 'store/search_result.html')
         
