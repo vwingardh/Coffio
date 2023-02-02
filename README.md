@@ -1,6 +1,6 @@
 # Coffio E-Commerce Website
 
-A responsive e-commerce website featuring Coffio, a sample coffee brand utilizing PostgreSQL for product inventory, content management, and user accounts. Users can create accounts to save products and blog posts to their favorites list. Users can also write product reviews, update profile details, view orders, and purchase products using Stripe API.   
+Coffio is an e-commerce website designed to be responsive and dynamic. Utilizes PostgreSQL for user accounts, product inventory and content management. Offers features such as creating user accounts, saving products/blog posts to favorites, writing product reviews, updating profile details, viewing orders, and purchasing products through Stripe API.   
 
 Built with:
 * Python
